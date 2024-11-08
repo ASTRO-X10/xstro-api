@@ -1,8 +1,9 @@
 import ffmpegInstaller from '@ffmpeg-installer/ffmpeg'; // Import the ffmpeg installer
+import { Readable } from 'stream';
+import ffmpeg from 'fluent-ffmpeg'; // Ensure you have fluent-ffmpeg installed
 
 // Set the ffmpeg path to the one from the installer
 ffmpeg.setFfmpegPath(ffmpegInstaller.path);
-import { Readable } from 'stream';
 
 /**
  * Converts an audio or video buffer into a WhatsApp-compatible PTT voice message buffer (ogg with opus codec).
@@ -25,7 +26,8 @@ export default async function convertToWhatsappPTT(inputBuffer) {
 			.audioCodec('libopus') // Using Opus codec for WhatsApp PTT
 			.audioBitrate(64) // Standard PTT bitrate
 			.format('ogg') // WhatsApp accepts ogg files for PTT
-			.on('data', chunk => outputBuffer.push(chunk)) // Collect the converted data
+			.pipe() // Explicitly tell ffmpeg to pipe the output (to be collected in a buffer)
+			.on('data', chunk => outputBuffer.push(chunk)) // Collect the chunks of the output buffer
 			.on('end', () => {
 				// Join the buffer chunks into a single buffer and resolve
 				const finalBuffer = Buffer.concat(outputBuffer);
@@ -33,7 +35,6 @@ export default async function convertToWhatsappPTT(inputBuffer) {
 			})
 			.on('error', err => {
 				reject(err); // Reject the promise on error
-			})
-			.run(); // Execute the conversion
+			});
 	});
 }
