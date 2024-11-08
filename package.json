@@ -1,25 +1,26 @@
 {
-  "name": "xstro-api",
-  "version": "1.0.0",
-  "description": "Full Functionality for Xstro Bot",
-  "type": "module",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "jest"
-  },
-  "author": "ASTRO-X10",
-  "license": "MIT",
-  "dependencies": {
-    "axios": "^1.7.7",
-    "cors": "^2.8.5",
-    "express": "^4.21.1",
-    "ffmpeg": "^0.0.4",
-    "fluent-ffmpeg": "^2.1.3"
-  },
-  "keywords": [],
-  "devDependencies": {
-    "jest": "^29.7.0",
-    "supertest": "^7.0.0"
-  }
+	"name": "xstro-api",
+	"version": "1.0.0",
+	"description": "Full Functionality for Xstro Bot",
+	"type": "module",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"test": "jest"
+	},
+	"author": "ASTRO-X10",
+	"license": "MIT",
+	"dependencies": {
+		"axios": "^1.7.7",
+		"cors": "^2.8.5",
+		"express": "^4.21.1",
+		"ffmpeg": "^0.0.4",
+		"fluent-ffmpeg": "^2.1.3"
+	},
+	"devDependencies": {
+		"jest": "^29.7.0",
+		"supertest": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-typescript": "^7.0.0"
+	}
 }
