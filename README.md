@@ -1,7 +1,7 @@
 # xstro-api
  Full Functionality for Xstro Bot
 
-```javacsript
+```javascript
 import express from 'express';
 
 const router = express.Router();
