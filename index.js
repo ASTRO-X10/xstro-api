@@ -39,20 +39,10 @@ const loadRoutes = () => {
 
 		if (file.endsWith('.js')) {
 			const routeUrl = pathToFileURL(filePath).href;
-			try {
-				const {
-					default: { router, path: routePath },
-				} = await import(routeUrl);
-				console.log(`Loaded route: ${routePath}, Router:`, router);
-
-				if (router) {
-					app.use(routePath || '/file', router);
-				} else {
-					console.error(`Router not found for ${file}`);
-				}
-			} catch (error) {
-				console.error(`Error loading route: ${file}`, error);
-			}
+			const {
+				default: { router, path: routePath },
+			} = await import(routeUrl);
+			if (router) app.use(routePath || '/file', router);
 		}
 	});
 };
